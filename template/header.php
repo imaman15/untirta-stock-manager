@@ -31,6 +31,11 @@
           </li>
           <li class="nav-item">
             <a class="nav-link p-3 <?php echo basename($_SERVER['PHP_SELF']) 
+            == "tampil_user.php" ? "active" : ""; ?>" href="tampil_user.php">
+            Tabel User</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link p-3 <?php echo basename($_SERVER['PHP_SELF']) 
             == "profile.php" ? "active" : ""; ?>" href="profile.php">
             My Profile</a>
           </li>

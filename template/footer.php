@@ -5,6 +5,9 @@
         <div class="col-12">
           <small>
           <?php 
+            /**
+             * Datetime untuk mengambil tahun dari server
+             */
             $tanggal = new DateTime('now');
             echo "Copyright © ".$tanggal->format("Y")." Andorid Developer Serang";
           ?>

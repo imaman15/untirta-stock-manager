@@ -1,13 +1,21 @@
 <?php
 // jalankan init.php (untuk session_start dan autoloader)
+/**
+ * kode untuk proses autoloading. 
+ * Dengan memanggil file init.php, maka ketika kode program menemukan class yang tidak 
+ * terdefinisi, otomatis akan mencarinya ke dalam folder class
+ */
 require 'init.php';
 
 // cek apakah user sudah login atau belum
 $user = new User();
 $user->cekUserSession();
 
+// Terdapat perintah proses instansiasi class DB ke dalam variabel $DB. Object
+// $DB inilah yang akan kita pakai untuk mengakses berbagai method dari class DB.
+
 // buat koneksi ke database
-$DB = DB::getInstance();
+$DB = DB::getInstance();  
 
 if (!empty($_GET)) {
   // jika terdeteksi form di submit, tampilkan hasil pencarian
@@ -50,37 +58,37 @@ include 'template/header.php';
         if (!empty($tabelBarang)) :
       ?>
         <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Nama Barang</th>
-            <th>Jumlah</th>
-            <th>Harga (Rp.)</th>
-            <th>Tanggal Update</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-        <?php
-          foreach ($tabelBarang as $barang) {
-            echo "<tr>";
-            echo "<th>{$barang->id_barang}</th>";
-            echo "<td>{$barang->nama_barang}</td>";
-            echo "<td>{$barang->jumlah_barang}</td>";
-            echo "<td>".number_format($barang->harga_barang, 0, ',', '.').
-            "</td>";
-            $tanggal = new DateTime($barang->tanggal_update);
-            echo "<td>".$tanggal->format("d-m-Y H:i")."</td>";
-            echo "<td>";
-              echo "<a href=\"edit_barang.php?id_barang={$barang->id_barang}\"
-              class=\"btn btn-info\">Edit</a> ";
-              echo "<a href=\"hapus_barang.php?id_barang={$barang->id_barang}\"
-              class=\"btn btn-danger\">Hapus</a>";
-            echo "</td>";
-            echo "</tr>";
-          }
-        ?>
-        </tbody>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nama Barang</th>
+              <th>Jumlah</th>
+              <th>Harga (Rp.)</th>
+              <th>Tanggal Update</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+          <?php
+            foreach ($tabelBarang as $barang) {
+              echo "<tr>";
+              echo "<th>{$barang->id_barang}</th>";
+              echo "<td>{$barang->nama_barang}</td>";
+              echo "<td>{$barang->jumlah_barang}</td>";
+              echo "<td>".number_format($barang->harga_barang, 0, ',', '.').
+              "</td>";
+              $tanggal = new DateTime($barang->tanggal_update);
+              echo "<td>".$tanggal->format("d-m-Y H:i")."</td>";
+              echo "<td>";
+                echo "<a href=\"edit_barang.php?id_barang={$barang->id_barang}\"
+                class=\"btn btn-info\">Edit</a> ";
+                echo "<a href=\"hapus_barang.php?id_barang={$barang->id_barang}\"
+                class=\"btn btn-danger\">Hapus</a>";
+              echo "</td>";
+              echo "</tr>";
+            }
+          ?>
+          </tbody>
         </table>
 
       <?php
